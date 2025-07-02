@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- Header-->
+<header class="bg-dark py-3"> 
+  <div class="container-sm px-3 px-lg-4 my-3">
+      <div class="text-center text-white">
+        <h1 class="fw-bolder" style="font-size: 1.5rem;">Üye Girişi</h1>
+      </div>
+  </div>
+</header>
+
+        <div class="container">
+        	<div class="row">
+        		<center>
+        			<div class="col-8">
+
+        				<br/><br/>
+<form method="POST" action="{% url 'login' %}">
+    {% csrf_token %}
+  <div class="mb-3">
+    <input type="text" class="form-control" name="username" placeholder="Kullanıcı Adı">
+  </div>
+  <div class="mb-3">
+    <input type="password" class="form-control" name="password" placeholder="Şifre">
+  </div>
+  <br/><br/>
+  <button type="submit" class="btn btn-secondary">Giriş Yap</button>
+</form>
+<br/><br/>
+<br/><br/>
+<br/><br/>
+<br/><br/>
+<br/><br/>
+<br/><br/>
+<br/><br/>
+        			</div>
+        		</center>
+        	</div>
+        </div>
+
+{% endblock %}

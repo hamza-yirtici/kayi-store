@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <br/>
+    <div class="card mb-3">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img src="{{ product.image.url }}" class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <center>
+            <h5 class="card-title">{{ product.name }}</h5>
+            <br/>
+            <div class="container">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="feature-item" style="text-align: left;">
+                    <p>Frekans: 868 Mhz veya 433 Mhz</p>
+                  </div>
+                  <div class="feature-item" style="text-align: left;">
+                    <p>Mod : S1, S2, T1, T2</p>
+                  </div>
+                  <div class="feature-item" style="text-align: left;">
+                    <p>Veri Çıkış Gücü : +11 dB</p>
+                  </div>
+                  <div class="feature-item" style="text-align: left;">
+                    <p>Mod : S1, S2, T1, T2</p>
+                  </div>
+                  <div class="feature-item" style="text-align: left;">
+                    <p>Pil: 3.6V Lityum Tiyonil </p>
+                  </div>
+                  <div class="feature-item" style="text-align: left;">
+                    <p>Koruma Sınıfı: IP54 veya IP68</p>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="feature-item" style="text-align: left;">
+                    <p>Standart : EN 13757-4 (Wireless M-Bus)</p>
+                  </div>
+                  <div class="feature-item" style="text-align: left;">
+                    <p>Protokol : OMS (Open Meter System)</p>
+                  </div>
+                  <div class="feature-item" style="text-align: left;">
+                    <p>Okuma Mesafesi : 500 metre</p>
+                  </div>
+                  <div class="feature-item" style="text-align: left;">
+                    <p>Şifreleme: AES 128-Bit (Opsiyonel)</p>
+                  </div>
+                  <div class="feature-item" style="text-align: left;">
+                    <p>Pil Ömrü: 5 yıl</p>
+                  </div>
+                  <div class="feature-item" style="text-align: left;">
+                    <p>Çalışma Sıcaklığı: -20 / +70</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p class="card-text" style="text-align: left;">Tüm marka ve model sayaçlarla uyumludur.
+
+              Walk-By ve Merkezi sistemden okunabilir.
+            
+              Optik  arayüz ya da RFID ile tüm ayarları değiştirilebilir.
+              
+              İstenilen pulse tipine göre uyarlanabilir.
+              
+              Ters akış algılanabilir.
+              
+              Yerinden söküldü bilgisi alınabilir.
+              
+              Geniş sıcaklık aralıklarında çalışabilir.
+              
+              Manyetik müdahaleleri ve diğer alarmları kaydeder.</p>
+            {{ product.price }}₺
+                <br/><br/>
+                <label for="quantity">Adet:</label>
+<input type="number" id="quantity" name="quantity" min="1" value="1" style="width: 60px;">
+<br/><br/>
+        <a href="{% url 'home'%}" class="btn btn-secondary">Geri</a>
+        <button type="button" value="{{ product.id }}" class="btn btn-secondary" id="add-cart">Sepete Ekle</button>
+        </center>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+
+    <script>
+      $(document).on('click', '#add-cart', function(e){
+          e.preventDefault();
+          $.ajax({
+              type: 'POST',
+              url: '{% url 'cart_add' %}',
+              data: {
+          product_id: $('#add-cart').val(),
+          product_qty: $('#qty-cart option:selected').text(),
+          csrfmiddlewaretoken: '{{ csrf_token }}',
+          action: 'post'
+              },
+      
+              success: function(json){
+                  document.getElementById("cart_quantity").textContent = json.qty
+                  location.reload();
+              },
+      
+              error: function(xhr, errmsg, err){
+      
+              }
+      
+      
+          });
+      
+      
+      
+      })
+      
+      </script>
+
+{% endblock %}

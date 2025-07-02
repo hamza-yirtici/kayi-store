@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- Header-->
+<header class="bg-dark py-3"> 
+  <div class="container-sm px-3 px-lg-4 my-3">
+      <div class="text-center text-white">
+        <h1 class="fw-bolder" style="font-size: 1.5rem;">Kayıt Ol</h1>
+      </div>
+  </div>
+</header>
+
+        <div class="container">
+        	<div class="row">
+        		<center>
+        			<div class="col-8">
+
+        				<br/><br/>
+<form method="POST" action="{% url 'register' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <br/><br/>
+    <button type="submit" class="btn btn-secondary">
+      Kayıt Ol
+    </button>
+</form>
+<br/><br/>
+<br/><br/>
+<br/><br/>
+        			</div>
+        		</center>
+        	</div>
+        </div>
+
+{% endblock %}
